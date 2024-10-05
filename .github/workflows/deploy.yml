@@ -43,14 +43,14 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       # -----------------------------------------------------------------------------------
-      - name: Initialize Terraform
-        id: init
+      - name: Initialize and plan Terraform
+        id: init_plan
         run: |
           terraform -chdir="./infrastructure" init
-          terraform -chdir="./infrastructure" plan
+          terraform -chdir="./infrastructure" plan -out=tfplan
       # -----------------------------------------------------------------------------------
       - name: Apply Terraform for the selected environment
-        run: terraform apply -var-file=".tfvars" -auto-approve
+        run: terraform -chdir="./infrastructure" apply -auto-approve tfplan
 
       # Se imprime un mensaje que indica el estado actual del trabajo ({{ job.status }}).
       - run: echo "🍏 This job's status is ${{ job.status }}."
