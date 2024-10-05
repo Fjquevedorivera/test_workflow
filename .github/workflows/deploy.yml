@@ -22,24 +22,6 @@ jobs:
       # Toma todo el código de tu proyecto que está en GitHub (el código fuente, imágenes, etc.) y lo copia.
       # "al servidor donde se ejecuta el trabajo"
         uses: actions/checkout@v4
-      # --
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-      # --
-      - name: Verify Terraform version
-        run: terraform --version
-      # --
-      - name: Authenticate to Google Cloud
-        run: echo "$GOOGLE_CREDENTIALS" > credentials.json
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-      # --
-      - name: Initialize Terraform
-        id: init
-        run: |
-          terraform -chdir="./infrastructure" init
-          terraform -chdir="./infrastructure" plan
-
       # Se imprime un mensaje confirmando que el repositorio {{ github.repository }} se ha clonado en el servidor.
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       # Se imprime un mensaje indicando que el flujo de trabajo está listo para probar el código en el servidor.
@@ -49,5 +31,26 @@ jobs:
       # Se utiliza el comando ls para listar los archivos en el directorio de trabajo ({{ github.workspace }}) del runner.
         run: |
           ls ${{ github.workspace }}
+      # ---------------------------------------------------------------------------------
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+      # -----------------------------------------------------------------------------------
+      - name: Verify Terraform version
+        run: terraform --version
+      # -----------------------------------------------------------------------------------
+      - name: Authenticate to Google Cloud
+        run: echo "$GOOGLE_CREDENTIALS" > credentials.json
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+      # -----------------------------------------------------------------------------------
+      - name: Initialize Terraform
+        id: init
+        run: |
+          terraform -chdir="./infrastructure" init
+          terraform -chdir="./infrastructure" plan
+      # -----------------------------------------------------------------------------------
+      - name: Apply Terraform for the selected environment
+        run: terraform apply
+
       # Se imprime un mensaje que indica el estado actual del trabajo ({{ job.status }}).
       - run: echo "🍏 This job's status is ${{ job.status }}."
