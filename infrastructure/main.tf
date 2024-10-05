@@ -12,13 +12,13 @@ resource "google_storage_bucket" "function_bucket" {
 data "archive_file" "function_code" {
   type        = "zip"
   source_dir  = "../cf_test_wom"
-  output_path = "/cf_test_wom/main.zip"
+  output_path = "../cf_test_wom/function.zip"
 }
 
 resource "google_storage_bucket_object" "source_code" {
-  name = "${path.module}/cf_test_wom/main.zip"
+  name = "cf_test_wom/main.zip"
   bucket = google_storage_bucket.function_bucket.name
-  source = "${path.module}/cf_test_wom/main.zip"
+  source = "../cf_test_wom/main.zip"
 }
 
 resource "google_cloudfunctions2_function" "function" {
