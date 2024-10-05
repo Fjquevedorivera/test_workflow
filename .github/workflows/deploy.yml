@@ -1,6 +1,10 @@
 name: GitHub Actions Demoo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on: 
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+    branches: [ develop ]
 jobs:
   # Este es el nombre del trabajo específico dentro del flujo de trabajo.
   # El trabajo contiene una serie de pasos que se ejecutan secuencialmente.
