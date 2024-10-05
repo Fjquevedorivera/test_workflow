@@ -55,7 +55,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       # --test---------------------------------------------------------------------------------
       - name: Test Environment Variables
-        run: echo "project id ${PROJECT_ID}"
+        run: echo "project id $PROJECT_ID"
 
 
       # # -----------------------------------------------------------------------------------
