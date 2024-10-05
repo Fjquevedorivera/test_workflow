@@ -50,7 +50,7 @@ jobs:
           terraform -chdir="./infrastructure" plan
       # -----------------------------------------------------------------------------------
       - name: Apply Terraform for the selected environment
-        run: terraform apply
+        run: terraform apply -var-file=".tfvars" -auto-approve
 
       # Se imprime un mensaje que indica el estado actual del trabajo ({{ job.status }}).
       - run: echo "🍏 This job's status is ${{ job.status }}."
