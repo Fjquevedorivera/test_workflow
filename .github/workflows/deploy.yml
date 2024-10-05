@@ -2,17 +2,38 @@ name: GitHub Actions Demoo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
+  # Este es el nombre del trabajo específico dentro del flujo de trabajo.
+  # El trabajo contiene una serie de pasos que se ejecutan secuencialmente.
   Explore-GitHub-Actions:
+    # El trabajo se ejecutará en una máquina virtual Ubuntu con la versión más reciente.
     runs-on: ubuntu-latest
     steps:
+      # {{ github.event_name }} se reemplaza con el nombre del evento que activó el flujo de trabajo (en este caso, push).
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      # Se imprime otro mensaje indicando que el trabajo se está ejecutando en un servidor con el sistema operativo {{ runner.os }} (en este caso, Ubuntu).
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      # {{ github.ref }} se reemplaza con el nombre de la rama actual.
+      # {{ github.repository }} se reemplaza con el nombre completo del repositorio (nombre de usuario/repositorio).
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      # Este paso tiene un nombre personalizado para mejorar la legibilidad.
+      # Esta acción descarga el código del repositorio al servidor donde se ejecuta el trabajo.
       - name: Check out repository code
+      # En este paso se utiliza una acción predefinida llamada actions/checkout@v4.
+      # Toma todo el código de tu proyecto que está en GitHub (el código fuente, imágenes, etc.) y lo copia.
+      # "al servidor donde se ejecuta el trabajo"
         uses: actions/checkout@v4
+      # --
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        run: terraform --version
+      # Se imprime un mensaje confirmando que el repositorio {{ github.repository }} se ha clonado en el servidor.
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      # Se imprime un mensaje indicando que el flujo de trabajo está listo para probar el código en el servidor.
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      # Este paso también tiene un nombre personalizado para mejorar la legibilidad.
       - name: List files in the repository
+      # Se utiliza el comando ls para listar los archivos en el directorio de trabajo ({{ github.workspace }}) del runner.
         run: |
           ls ${{ github.workspace }}
+      # Se imprime un mensaje que indica el estado actual del trabajo ({{ job.status }}).
       - run: echo "🍏 This job's status is ${{ job.status }}."
