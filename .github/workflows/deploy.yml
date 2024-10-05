@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   # Este es el nombre del trabajo específico dentro del flujo de trabajo.
-  # El trabajo contiene una serie de pasos que se ejecutan secuencialmente. 
+  # El trabajo contiene una serie de pasos que se ejecutan secuencialmente.
   Explore-GitHub-Actions:
     # El trabajo se ejecutará en una máquina virtual Ubuntu con la versión más reciente.
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       # Este paso también tiene un nombre personalizado para mejorar la legibilidad.
       - name: List files in the repository
-      # Se utiliza el comando ls para listar los archivos en el directorio de trabajo ({{ github.workspace }}) del runner. 
+      # Se utiliza el comando ls para listar los archivos en el directorio de trabajo ({{ github.workspace }}) del runner.
         run: |
           ls ${{ github.workspace }}
       # ---------------------------------------------------------------------------------
@@ -39,11 +39,9 @@ jobs:
         run: terraform --version
       # -----------------------------------------------------------------------------------
       - name: Authenticate to Google Cloud
-        run: |
-          echo "$GOOGLE_CREDENTIALS" > credentials.json
-          ls ${{ github.workspace }}
+        run: echo "$GOOGLE_CREDENTIALS" > credentials.json
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}          
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       # -----------------------------------------------------------------------------------
       - name: Initialize and plan Terraform
         id: init_plan

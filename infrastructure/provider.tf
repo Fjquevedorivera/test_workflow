@@ -1,9 +1,3 @@
-provider "google" {
-  credentials = file("credentials.json")
-  project = var.project_id
-  region  = var.region
-}
-
 terraform {
   required_providers {
     google = {
