@@ -5,7 +5,7 @@ resource "google_storage_bucket" "function_bucket" {
 }
 
 resource "google_storage_bucket_object" "source_code" {
-  name = "main.py"
+  name = "cf_test_wom/main.py"
   bucket = google_storage_bucket.function_bucket.name
   source = "../cf_test_wom/main.py"
 }
