@@ -51,6 +51,15 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       # -----------------------------------------------------------------------------------
+      - name: Import existing bucket to Terraform state
+        run: |
+          terraform -chdir="./infrastructure" init
+          terraform -chdir="./infrastructure" import google_storage_bucket.function_bucket ${var.project_id}-gcf-source || echo "Bucket already imported"
+      # -----------------------------------------------------------------------------------
+      - name: Import existing Cloud Function to Terraform state
+        run: |
+          terraform -chdir="./infrastructure" import google_cloudfunctions2_function.function ${var.region}/${var.cf_name} || echo "Function already imported"
+      # -----------------------------------------------------------------------------------
       - name: Initialize and plan Terraform
         id: init_plan
         run: |

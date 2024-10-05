@@ -11,7 +11,7 @@ resource "google_storage_bucket_object" "source_code" {
 }
 
 resource "google_cloudfunctions2_function" "function" {
-  name        = "python-function"
+  name        = var.cf_name
   location    = var.region
   description = "A Python Cloud Function deployed with Terraform"
 
