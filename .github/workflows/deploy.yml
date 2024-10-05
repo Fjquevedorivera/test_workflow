@@ -9,7 +9,7 @@ jobs:
   # Este es el nombre del trabajo específico dentro del flujo de trabajo.
   # El trabajo contiene una serie de pasos que se ejecutan secuencialmente.
   Explore-GitHub-Actions:
-    # El trabajo se ejecutará en una máquina virtual Ubuntu con la versión más reciente.
+    # El trabajo se ejecutará en una máquina virtual Ubuntu con la versión más reciente. 
     runs-on: ubuntu-latest
     steps:
       # {{ github.event_name }} se reemplaza con el nombre del evento que activó el flujo de trabajo (en este caso, push).
