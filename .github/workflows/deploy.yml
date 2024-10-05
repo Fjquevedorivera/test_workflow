@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   # Este es el nombre del trabajo específico dentro del flujo de trabajo.
-  # El trabajo contiene una serie de pasos que se ejecutan secuencialmente. 
+  # El trabajo contiene una serie de pasos que se ejecutan secuencialmente.
   Explore-GitHub-Actions:
     # El trabajo se ejecutará en una máquina virtual Ubuntu con la versión más reciente.
     runs-on: ubuntu-latest
