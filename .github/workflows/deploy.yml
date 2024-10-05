@@ -37,8 +37,8 @@ jobs:
       - name: Initialize Terraform
         id: init
         run: |
-          terraform -chdir="./infrastructure/main.tf" init
-          terraform -chdir="./infrastructure/main.tf" plan
+          terraform -chdir="./infrastructure" init
+          terraform -chdir="./infrastructure" plan
 
       # Se imprime un mensaje confirmando que el repositorio {{ github.repository }} se ha clonado en el servidor.
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
