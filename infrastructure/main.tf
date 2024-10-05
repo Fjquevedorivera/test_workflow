@@ -1,18 +1,3 @@
-provider "google" {
-  credentials = file("../credentials.json")
-  project = var.project_id
-  region  = var.region
-}
-
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = ">= 4.34.0"
-    }
-  }
-}
-
 resource "google_storage_bucket" "function_bucket" {
   name                        = "${var.project_id}-gcf-source"
   location                    = var.region
@@ -26,11 +11,11 @@ resource "google_cloudfunctions2_function" "function" {
 
   build_config {
     runtime     = "python311"
-    entry_point = "hello_world"
+    entry_point = "hello_get"
     source {
       storage_source {
         bucket = google_storage_bucket.function_bucket.name
-        object = "function-source.zip"
+        object = "cf_test_wom/main.py"
       }
     }
   }
