@@ -4,6 +4,12 @@ resource "google_storage_bucket" "function_bucket" {
   uniform_bucket_level_access = true
 }
 
+resource "google_storage_bucket_object" "source_code" {
+  name = "main.py"
+  bucket = google_storage_bucket.function_bucket.name
+  source = "../cf_test_wom/main.py"
+}
+
 resource "google_cloudfunctions2_function" "function" {
   name        = "python-function"
   location    = var.region
