@@ -7,3 +7,8 @@ variable "region" {
   type = string
   description = "Región de despliegue de la Cloud Function"
 }
+
+variable "cf_name" {
+  type = string
+  description = "Nombre de la Cloud Function"
+}
