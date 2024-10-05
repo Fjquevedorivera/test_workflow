@@ -6,12 +6,7 @@ on:
       - 'main' 
   workflow_dispatch:
     branches: 
-      - 'develop' 
-    inputs:
-      region:
-        description: 'Google Cloud Region'
-        required: true
-        default: 'us-central1'
+      - 'develop'
 
 jobs:
   # Este es el nombre del trabajo específico dentro del flujo de trabajo.
@@ -19,6 +14,8 @@ jobs:
   Explore-GitHub-Actions:
     # El trabajo se ejecutará en una máquina virtual Ubuntu con la versión más reciente. 
     runs-on: ubuntu-latest
+    env:
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
     steps:
       # {{ github.event_name }} se reemplaza con el nombre del evento que activó el flujo de trabajo (en este caso, push).
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
