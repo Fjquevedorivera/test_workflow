@@ -33,7 +33,7 @@ resource "google_cloudfunctions2_function" "function" {
 	source {
 	  storage_source {
 		bucket = google_storage_bucket.function_bucket.name
-		object = "cf_test_wom/main.zip"
+		object = "cf_test_wom/function.zip"
 	  }
 	}
   }
