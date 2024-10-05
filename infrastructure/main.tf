@@ -16,9 +16,9 @@ data "archive_file" "function_code" {
 }
 
 resource "google_storage_bucket_object" "source_code" {
-  name = "cf_test_wom/main.zip"
+  name = "cf_test_wom/function.zip"
   bucket = google_storage_bucket.function_bucket.name
-  source = "../cf_test_wom/main.zip"
+  source = "../cf_test_wom/function.zip"
 }
 
 resource "google_cloudfunctions2_function" "function" {
